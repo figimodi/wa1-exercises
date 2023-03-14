@@ -7,13 +7,18 @@ const db = new sqlite.Database('questions.sqlite', (err) => {
     if (err) throw err; 
 });
 
+let authorList = []
+
 function QuestionList() {
   // TODO implement this function 'QuestionList'
-    db.all("SELECT * FROM question", (err, rows) => {
+    db.all("SELECT * FROM answer", (err, rows) => {
         if (err)
-            console.log(err)
-        else
-            rows.forEach(row => console.log(row))
+            throw err
+        else {
+            authorList = rows.map(item => item['author'])
+            //console.log(authorList)
+        }
+            
     });
 }
 
