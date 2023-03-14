@@ -9,7 +9,12 @@ const db = new sqlite.Database('questions.sqlite', (err) => {
 
 function QuestionList() {
   // TODO implement this function 'QuestionList'
-
+    db.all("SELECT * FROM question", (err, rows) => {
+        if (err)
+            console.log(err)
+        else
+            rows.forEach(row => console.log(row))
+    });
 }
 
 function Answer(id, text, author, score, date) {
