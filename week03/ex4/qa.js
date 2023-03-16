@@ -3,8 +3,8 @@
 const dayjs = require('dayjs');
 const sqlite = require('sqlite3');
 
-const db = new sqlite.Database('questions.sqlite', (err) => { 
-    if (err) throw err; 
+const db = new sqlite.Database('questions.sqlite', (err) => {
+    if (err) throw err;
 });
 
 let authorList = []
