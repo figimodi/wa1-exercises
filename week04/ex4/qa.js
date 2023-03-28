@@ -88,19 +88,4 @@ async function query() {
     }
 }
 
-query().then((answsers)=>{})
-
-const answers2 = await query() ;
-
-const answers3 = query() ;
-
-
-ql.getQuestion(2)
-    .then(question=>question.getAnswers())
-    .then(answers=>console.log(`We have ${answers.length} anwsers`)) ;
-
-ql.addQuestion(new Question(3, 'How are you?', 'Fulvio', '2023-03-14'));
-
-
-
 debugger;
