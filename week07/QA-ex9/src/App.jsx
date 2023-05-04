@@ -9,6 +9,7 @@ import { useState } from "react";
 const myquestion = new Question(1, 'Is JavaScript better than Python?', 'Luigi De Russis', '2023-01-01');
 myquestion.add(new Answer(1, 'Yes', 'Luca Mannella', -10, '2023-02-15'));
 myquestion.add(new Answer(2, 'Both have their pros and cons', 'Mario Rossi', 0, '2023-03-04'));
+myquestion.add(new Answer(3, 'Hiiii', 'Dumb boy', -5, '2023-03-04'));
 
 
 function App() {
@@ -21,7 +22,6 @@ function App() {
   }
 
   const upVoteAnswer = (id) => {
-    console.log('Upvoting answer ' + id);
     setAnswers((oldAnswers) => (
       oldAnswers.map((ans) => (
         ans.id === id ? new Answer(ans.id, ans.text, ans.author, ans.score + 1, ans.date) : ans
@@ -30,17 +30,20 @@ function App() {
   }
 
   const addAnswer = (date, text, author) => {
-    // TODO: test/debug
     setAnswers((oldAnswers) => {
       const newId = Math.max(...oldAnswers.map(a => a.id)) + 1;
       const newAns = new Answer(newId, text, author, 0, date);
       return [...oldAnswers, newAns];
     });
-
   }
 
-  // alternative: group all callback functions in one object, to minimize the number of props to pass
-  const actions = { deleteAnswer: deleteAnswer, upVoteAnswer: upVoteAnswer }
+  const editAnswer = (id, date, text, author) => {
+    setAnswers((oldAnswers) => (
+      oldAnswers.map((ans) => (
+        ans.id === id ? new Answer(ans.id, text, author, ans.score, date) : ans
+      ))
+    ));
+  }
 
   return <>
     <header>
@@ -56,7 +59,8 @@ function App() {
     <main>
       <Container>
         <QuestionWithAnswers question={question} answers={answers}
-          deleteAnswer={deleteAnswer} upVoteAnswer={upVoteAnswer} />
+          deleteAnswer={deleteAnswer} upVoteAnswer={upVoteAnswer} 
+          addAnswer={addAnswer} editAnswer={editAnswer} />
       </Container>
     </main>
   </>
